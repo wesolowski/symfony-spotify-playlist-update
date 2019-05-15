@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b005d812f307794d5ff5c4506b3196e",
+    "content-hash": "3d1b63df2c8fd9e9fcfadf2ddb6788ed",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -234,6 +234,141 @@
                 "spotify"
             ],
             "time": "2018-11-07T17:40:08+00:00"
+        },
+        {
+            "name": "nette/php-generator",
+            "version": "v3.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/php-generator.git",
+                "reference": "acff8b136fad84b860a626d133e791f95781f9f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/php-generator/zipball/acff8b136fad84b860a626d133e791f95781f9f5",
+                "reference": "acff8b136fad84b860a626d133e791f95781f9f5",
+                "shasum": ""
+            },
+            "require": {
+                "nette/utils": "^2.4.2 || ~3.0.0",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "nette/tester": "^2.0",
+                "tracy/tracy": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "🐘 Nette PHP Generator: generates neat PHP code for you. Supports new PHP 7.3 features.",
+            "homepage": "https://nette.org",
+            "keywords": [
+                "code",
+                "nette",
+                "php",
+                "scaffolding"
+            ],
+            "time": "2019-03-15T03:41:13+00:00"
+        },
+        {
+            "name": "nette/utils",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/utils.git",
+                "reference": "bd961f49b211997202bda1d0fbc410905be370d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/utils/zipball/bd961f49b211997202bda1d0fbc410905be370d4",
+                "reference": "bd961f49b211997202bda1d0fbc410905be370d4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "nette/tester": "~2.0",
+                "tracy/tracy": "^2.3"
+            },
+            "suggest": {
+                "ext-gd": "to use Image",
+                "ext-iconv": "to use Strings::webalize() and toAscii()",
+                "ext-intl": "to use Strings::webalize(), toAscii(), normalize() and compare()",
+                "ext-json": "to use Nette\\Utils\\Json",
+                "ext-mbstring": "to use Strings::lower() etc...",
+                "ext-xml": "to use Strings::length() etc. when mbstring is not available"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "🛠 Nette Utils: lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc.",
+            "homepage": "https://nette.org",
+            "keywords": [
+                "array",
+                "core",
+                "datetime",
+                "images",
+                "json",
+                "nette",
+                "paginator",
+                "password",
+                "slugify",
+                "string",
+                "unicode",
+                "utf-8",
+                "utility",
+                "validation"
+            ],
+            "time": "2019-03-22T01:00:30+00:00"
         },
         {
             "name": "psr/cache",
@@ -1711,6 +1846,184 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2019-03-30T15:58:42+00:00"
+        },
+        {
+            "name": "xervice/config",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xervice/config.git",
+                "reference": "11b6d9eeba9a22539a40cb9b313f4bed2fc5bdbb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xervice/config/zipball/11b6d9eeba9a22539a40cb9b313f4bed2fc5bdbb",
+                "reference": "11b6d9eeba9a22539a40cb9b313f4bed2fc5bdbb",
+                "shasum": ""
+            },
+            "require-dev": {
+                "codeception/codeception": "*",
+                "phpstan/phpstan": "^0.9.0",
+                "symfony/var-dumper": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "XerviceTest\\": "tests/Xervice/"
+                },
+                "psr-0": {
+                    "Xervice\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Bertram",
+                    "email": "contact@mibexx.de"
+                }
+            ],
+            "description": "Config environment to xervice components",
+            "time": "2018-08-20T10:24:32+00:00"
+        },
+        {
+            "name": "xervice/console",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xervice/console.git",
+                "reference": "017b80d78c74fee6e918c6643530699706eb289d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xervice/console/zipball/017b80d78c74fee6e918c6643530699706eb289d",
+                "reference": "017b80d78c74fee6e918c6643530699706eb289d",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/console": "^4.0.0",
+                "xervice/core": "^4.0.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "*",
+                "phpstan/phpstan": "^0.9.0",
+                "symfony/var-dumper": "*"
+            },
+            "bin": [
+                "bin/xervice"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Xervice\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Bertram",
+                    "email": "contact@mibexx.de"
+                }
+            ],
+            "time": "2018-08-23T09:19:06+00:00"
+        },
+        {
+            "name": "xervice/core",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xervice/core.git",
+                "reference": "f2005706e1363a62bf929fc84b2b45aaedf94f16"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xervice/core/zipball/f2005706e1363a62bf929fc84b2b45aaedf94f16",
+                "reference": "f2005706e1363a62bf929fc84b2b45aaedf94f16",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0",
+                "xervice/config": "^3.0.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "*",
+                "phpstan/phpstan": "^0.9.0",
+                "symfony/var-dumper": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "XerviceTest\\": "tests/Xervice/"
+                },
+                "psr-0": {
+                    "Test\\": "src/",
+                    "Xervice\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Bertram",
+                    "email": "contact@mibexx.de"
+                }
+            ],
+            "description": "Xervice core functionality",
+            "time": "2018-08-28T08:22:48+00:00"
+        },
+        {
+            "name": "xervice/data-provider",
+            "version": "2.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xervice/data-provider.git",
+                "reference": "ae8e07c95098b20c1bdcad471dea2a8ccdb619fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xervice/data-provider/zipball/ae8e07c95098b20c1bdcad471dea2a8ccdb619fc",
+                "reference": "ae8e07c95098b20c1bdcad471dea2a8ccdb619fc",
+                "shasum": ""
+            },
+            "require": {
+                "nette/php-generator": "^3.0.0",
+                "php": ">=7.1.0",
+                "symfony/finder": "^4.1.0",
+                "xervice/console": "^2.0.0",
+                "xervice/core": "^4.0.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "*",
+                "phpstan/phpstan": "^0.9.0",
+                "symfony/var-dumper": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Xervice\\": "src/"
+                },
+                "psr-4": {
+                    "DataProvider\\": "src/Generated/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Bertram",
+                    "email": "contact@mibexx.de"
+                }
+            ],
+            "time": "2019-05-14T08:10:29+00:00"
         }
     ],
     "packages-dev": [
@@ -1863,6 +2176,61 @@
             "time": "2019-04-23T14:37:24+00:00"
         },
         {
+            "name": "symfony/polyfill-php72",
+            "version": "v1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php72.git",
+                "reference": "ab50dcf166d5f577978419edd37aa2bb8eabce0c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/ab50dcf166d5f577978419edd37aa2bb8eabce0c",
+                "reference": "ab50dcf166d5f577978419edd37aa2bb8eabce0c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.11-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php72\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2019-02-06T07:57:58+00:00"
+        },
+        {
             "name": "symfony/stopwatch",
             "version": "v4.2.8",
             "source": {
@@ -1911,6 +2279,82 @@
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
             "time": "2019-01-16T20:31:39+00:00"
+        },
+        {
+            "name": "symfony/var-dumper",
+            "version": "v4.2.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/var-dumper.git",
+                "reference": "3c4084cb1537c0e2ad41aad622bbf55a44a5c9ce"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/3c4084cb1537c0e2ad41aad622bbf55a44a5c9ce",
+                "reference": "3c4084cb1537c0e2ad41aad622bbf55a44a5c9ce",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "symfony/polyfill-mbstring": "~1.0",
+                "symfony/polyfill-php72": "~1.5"
+            },
+            "conflict": {
+                "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0",
+                "symfony/console": "<3.4"
+            },
+            "require-dev": {
+                "ext-iconv": "*",
+                "symfony/console": "~3.4|~4.0",
+                "symfony/process": "~3.4|~4.0",
+                "twig/twig": "~1.34|~2.4"
+            },
+            "suggest": {
+                "ext-iconv": "To convert non-UTF-8 strings to UTF-8 (or symfony/polyfill-iconv in case ext-iconv cannot be used).",
+                "ext-intl": "To show region name in time zone dump",
+                "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
+            },
+            "bin": [
+                "Resources/bin/var-dump-server"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.2-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "Resources/functions/dump.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Component\\VarDumper\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony mechanism for exploring and dumping PHP variables",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "debug",
+                "dump"
+            ],
+            "time": "2019-05-01T12:55:36+00:00"
         }
     ],
     "aliases": [],
