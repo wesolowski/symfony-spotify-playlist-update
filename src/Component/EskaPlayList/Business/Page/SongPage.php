@@ -8,7 +8,7 @@ use SpotifyApiConnect\Domain\DataTransferObject\TrackSearchRequestDataProvider;
 use DomDocument;
 use DomXPath;
 
-class SongPage
+class SongPage implements SongPageInterface
 {
     /**
      * @var HtmlInterface
