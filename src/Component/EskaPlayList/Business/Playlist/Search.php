@@ -7,7 +7,7 @@ namespace App\Component\EskaPlayList\Business\Playlist;
 use SpotifyApiConnect\Application\SpotifyWebApiInterface;
 use SpotifyApiConnect\Domain\DataTransferObject\TrackSearchRequestDataProvider;
 
-class Search
+class Search implements SearchInterface
 {
     /**
      * @var SpotifyWebApiInterface
@@ -23,28 +23,20 @@ class Search
     }
 
     /**
-     * @param TrackSearchRequestDataProvider[] $trackSearchRequestDataProviderList
-     * @return array
+     * @param TrackSearchRequestDataProvider $trackSearchRequestDataProvider
+     * @return string
      */
-    public function searchSongs(array $trackSearchRequestDataProviderList): array
+    public function searchSongs(TrackSearchRequestDataProvider $trackSearchRequestDataProvider): string
     {
-        $tractIds = [];
-        foreach ($trackSearchRequestDataProviderList as $trackSearchRequestDataProvider) {
-            $spotifySongId = $this->isSongInConfig($trackSearchRequestDataProvider);
-            if (empty($spotifySongId)) {
-                $tracksSearchDataProvider = $this->spotifyWebApi->searchTrack($trackSearchRequestDataProvider);
-                if ($tracksSearchDataProvider->getTotal() > 0) {
-                    $spotifySongId = $tracksSearchDataProvider->getItems()[0]->getId();
-                }
+        $spotifySongId = $this->isSongInConfig($trackSearchRequestDataProvider);
+        if (empty($spotifySongId)) {
+            $tracksSearchDataProvider = $this->spotifyWebApi->searchTrack($trackSearchRequestDataProvider);
+            if ($tracksSearchDataProvider->getTotal() > 0) {
+                $spotifySongId = $tracksSearchDataProvider->getItems()[0]->getId();
             }
-
-            if(!empty($spotifySongId)) {
-                $tractIds[] = $spotifySongId;
-            }
-
         }
 
-        return $tractIds;
+        return $spotifySongId;
     }
 
     private function isSongInConfig($trackSearchRequestDataProvider): string

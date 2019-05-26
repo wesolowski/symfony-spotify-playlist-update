@@ -5,8 +5,9 @@ namespace App\Component\EskaPlayList\Business\Playlist;
 
 
 use SpotifyApiConnect\Application\SpotifyWebApiInterface;
+use SpotifyApiConnect\Domain\DataTransferObject\PlaylistDataProvider;
 
-class Clear
+class Clear implements ClearInterface
 {
     /**
      * @var SpotifyWebApiInterface
@@ -14,23 +15,35 @@ class Clear
     private $spotifyWebApi;
 
     /**
-     * @param SpotifyWebApiInterface $spotifyWebApi
+     * @var PlaylistDataProvider
      */
-    public function __construct(SpotifyWebApiInterface $spotifyWebApi)
+    private $playlistDataProvider;
+
+    /**
+     * @param SpotifyWebApiInterface $spotifyWebApi
+     * @param PlaylistDataProvider $playlistDataProvider
+     */
+    public function __construct(
+        SpotifyWebApiInterface $spotifyWebApi,
+        PlaylistDataProvider $playlistDataProvider
+    )
     {
         $this->spotifyWebApi = $spotifyWebApi;
+        $this->playlistDataProvider = $playlistDataProvider;
     }
+
 
     public function deleteAllSong()
     {
-        $this->spotifyWebApi->getPlaylistTracks();
-        $playlistSongs = $api->getUserPlaylistTracks($config['user'],$playlistId )->items;
+        $playListId = $this->playlistDataProvider->getId();
+        $playlistTracksDataProvider = $this->spotifyWebApi->getPlaylistTracks($playListId);
         $songToDelete = [];
-        foreach ($playlistInfo->tracks->items as $song) {
-            $songToDelete[]['id'] = $song->track->id;
+        foreach ($playlistTracksDataProvider->getItems() as $song) {
+            $songToDelete[]['id'] = $song->getTrack()->getId();
         }
+
         if(!empty($songToDelete)) {
-            $api->deleteUserPlaylistTracks($config['user'],$playlistId, $songToDelete);
+            $this->spotifyWebApi->deletePlaylistTracks($playListId, $songToDelete );
         }
     }
 }
