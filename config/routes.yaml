@@ -1,3 +1,6 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+token_generate:
+    path: /token/generate
+    controller: App\Component\Token\Communication\Controller\Token::generate
+token_save:
+    path: /token/save/
+    controller: App\Component\Token\Communication\Controller\Token::saveToken

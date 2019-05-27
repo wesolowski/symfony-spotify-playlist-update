@@ -19,3 +19,11 @@ services:
 
     SpotifyApiConnect\:
         resource: '../api/*'
+
+    App\Component\Token\Communication\Controller\:
+        resource: '../src/Component/Token/Communication/Controller/*'
+        tags: ['controller.service_arguments']
+
+    App\Component\Token\Business\Model\RefreshToken:
+        arguments:
+            $kernelProjectDir : '%kernel.project_dir%'
