@@ -21,6 +21,20 @@ class SpotifyWebApi
     private $kernelProjectDir;
 
     /**
+     * @param SpotifyApiConnectFactoryInterface $spotifyApiConnectFactory
+     * @param string $kernelProjectDir
+     */
+    public function __construct(
+        SpotifyApiConnectFactoryInterface $spotifyApiConnectFactory,
+        string $kernelProjectDir
+    )
+    {
+        $this->spotifyApiConnectFactory = $spotifyApiConnectFactory;
+        $this->kernelProjectDir = $kernelProjectDir;
+    }
+
+
+    /**
      * @return \SpotifyApiConnect\Application\SpotifyWebApiInterface
      */
     public function createSpotifyWebApi() : SpotifyWebApiInterface
