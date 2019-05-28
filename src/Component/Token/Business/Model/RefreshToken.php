@@ -7,7 +7,7 @@ use SpotifyApiConnect\SpotifyApiConnectFactoryInterface;
 
 class RefreshToken implements RefreshTokenInterface
 {
-    private const FILE_NAME = 'token.txt';
+    public const FILE_NAME = 'token.txt';
 
     /**
      * @var SpotifyApiConnectFactoryInterface
@@ -61,6 +61,9 @@ class RefreshToken implements RefreshTokenInterface
         return $accessToken;
     }
 
+    /**
+     * @return string
+     */
     private function getPath() : string
     {
         return $this->kernelProjectDir . '/' . self::FILE_NAME;

@@ -4,5 +4,5 @@ namespace App\Component\Token\Business\Model;
 
 interface GenerateInterface
 {
-    public function url();
+    public function url() : string;
 }

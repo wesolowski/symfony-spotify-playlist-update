@@ -5,6 +5,7 @@ namespace App\Component\EskaPlayList\Business\Factory;
 
 
 use App\Component\EskaPlayList\Business\EskaPlayListConfig;
+use App\Component\Token\Business\TokenFacadeInterface;
 use SpotifyApiConnect\Application\SpotifyWebApiInterface;
 use SpotifyApiConnect\SpotifyApiConnectFactoryInterface;
 
@@ -16,38 +17,30 @@ class SpotifyWebApi
     private $spotifyApiConnectFactory;
 
     /**
-     * @var
+     * @var TokenFacadeInterface
      */
-    private $kernelProjectDir;
+    private $tokenFacade;
 
     /**
      * @param SpotifyApiConnectFactoryInterface $spotifyApiConnectFactory
-     * @param string $kernelProjectDir
+     * @param TokenFacadeInterface $tokenFacade
      */
     public function __construct(
         SpotifyApiConnectFactoryInterface $spotifyApiConnectFactory,
-        string $kernelProjectDir
+        TokenFacadeInterface $tokenFacade
     )
     {
         $this->spotifyApiConnectFactory = $spotifyApiConnectFactory;
-        $this->kernelProjectDir = $kernelProjectDir;
+        $this->tokenFacade = $tokenFacade;
     }
-
 
     /**
      * @return \SpotifyApiConnect\Application\SpotifyWebApiInterface
      */
     public function createSpotifyWebApi() : SpotifyWebApiInterface
     {
-        $accessToken = '';
-        $spotifyApiAuth = $this->spotifyApiConnectFactory->createSpotifyApiAuth();
-        $tokenPath = $this->kernelProjectDir . '/'.  EskaPlayListConfig::REFRESH_TOKEN_FILE_NAME;
-        if (file_exists($tokenPath) && ($token = file_get_contents($tokenPath))) {
-            $accessToken = $spotifyApiAuth->getAccessByRefreshToken($token);
-        } else {
-            trigger_error('Token file not found ' . $tokenPath, E_USER_WARNING);
-        }
-
-        return $this->spotifyApiConnectFactory->createSpotifyWebApi($accessToken);
+        return $this->spotifyApiConnectFactory->createSpotifyWebApi(
+            $this->tokenFacade->getToken()
+        );
     }
 }
