@@ -6,5 +6,8 @@ namespace App\Component\EskaPlayList\Business;
 
 class EskaPlayListFacade
 {
+    public function updatePlayList()
+    {
 
+    }
 }

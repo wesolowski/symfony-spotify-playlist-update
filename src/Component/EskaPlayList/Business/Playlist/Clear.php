@@ -5,6 +5,7 @@ namespace App\Component\EskaPlayList\Business\Playlist;
 
 
 use SpotifyApiConnect\Application\SpotifyWebApiInterface;
+use SpotifyApiConnect\Domain\DataTransferObject\DeleteTrackInfoDataProvider;
 use SpotifyApiConnect\Domain\DataTransferObject\PlaylistDataProvider;
 
 class Clear implements ClearInterface
@@ -39,7 +40,11 @@ class Clear implements ClearInterface
         $playlistTracksDataProvider = $this->spotifyWebApi->getPlaylistTracks($playListId);
         $songToDelete = [];
         foreach ($playlistTracksDataProvider->getItems() as $song) {
-            $songToDelete[]['id'] = $song->getTrack()->getId();
+            $deleteTrackInfoDataProvider = new DeleteTrackInfoDataProvider();
+            $deleteTrackInfoDataProvider->setId(
+                $song->getTrack()->getId()
+            );
+            $songToDelete[] = $deleteTrackInfoDataProvider;
         }
 
         if(!empty($songToDelete)) {
