@@ -79,6 +79,6 @@ class Update
             $trackIds
         );
 
-        //dump($notFoundSong);
+        dump($notFoundSong);
     }
 }
