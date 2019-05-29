@@ -8,7 +8,7 @@ use App\Component\EskaPlayList\Business\Playlist\SearchInterface;
 use SpotifyApiConnect\Application\SpotifyWebApiInterface;
 use SpotifyApiConnect\Domain\DataTransferObject\PlaylistDataProvider;
 
-class Update
+class Update implements UpdateInterface
 {
     /**
      * @var SpotifyWebApiInterface
@@ -73,12 +73,13 @@ class Update
                 $notFoundSong[] = $trackSearchRequestDataProvider;
             }
         }
+        dump($notFoundSong);
 
         $this->spotifyWebApi->addPlaylistTracks(
             $this->playlistDataProvider->getId(),
             $trackIds
         );
 
-        dump($notFoundSong);
+
     }
 }
