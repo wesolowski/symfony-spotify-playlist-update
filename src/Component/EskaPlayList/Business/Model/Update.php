@@ -60,7 +60,9 @@ class Update implements UpdateInterface
 
     public function updatePlayList()
     {
-        $this->clear->deleteAllSong();
+        $this->clear->deleteAllSong(
+            $this->playlistDataProvider
+        );
         $trackSearchRequestDataProviderList = $this->songPage->getList();
         $trackIds = [];
         $notFoundSong = [];

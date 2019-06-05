@@ -14,6 +14,7 @@ services:
         resource: '../src/Component/Token/Communication/Controller/*'
         tags: ['controller.service_arguments']
 
+
     App\Component\Token\Business\Model\RefreshToken:
         arguments:
             $kernelProjectDir : '%kernel.project_dir%'
@@ -25,10 +26,17 @@ services:
     SpotifyApiConnect\Application\SpotifyWebApiInterface:
         factory: ['App\Component\EskaPlayList\Business\Factory\SpotifyWebApi', 'createSpotifyWebApi']
 
-    SpotifyApiConnect\Domain\DataTransferObject\PlaylistDataProvider:
+    PlaylistDataProviderRadioEska:
+        class: 'SpotifyApiConnect\Domain\DataTransferObject\PlaylistDataProvider'
         factory: ['App\Component\EskaPlayList\Business\Factory\PlayListInfo', 'createPlayListInfo']
         arguments:
+            $spotifyWebApi: '@SpotifyApiConnect\Application\SpotifyWebApiInterface'
             $playListName: 'Radio Eska - 2 x Gorąca 20'
+
+    App\Component\EskaPlayList\Business\Model\Update:
+        arguments:
+            $playlistDataProvider: '@PlaylistDataProviderRadioEska'
+
 
     SpotifyApiConnect\SpotifyApiConnectFactoryInterface:
         class: SpotifyApiConnect\SpotifyApiConnectFactory

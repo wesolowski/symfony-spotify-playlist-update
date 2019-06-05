@@ -16,27 +16,20 @@ class Clear implements ClearInterface
     private $spotifyWebApi;
 
     /**
-     * @var PlaylistDataProvider
-     */
-    private $playlistDataProvider;
-
-    /**
      * @param SpotifyWebApiInterface $spotifyWebApi
      * @param PlaylistDataProvider $playlistDataProvider
      */
     public function __construct(
-        SpotifyWebApiInterface $spotifyWebApi,
-        PlaylistDataProvider $playlistDataProvider
+        SpotifyWebApiInterface $spotifyWebApi
     )
     {
         $this->spotifyWebApi = $spotifyWebApi;
-        $this->playlistDataProvider = $playlistDataProvider;
     }
 
 
-    public function deleteAllSong()
+    public function deleteAllSong(PlaylistDataProvider $playlistDataProvider) : void
     {
-        $playListId = $this->playlistDataProvider->getId();
+        $playListId = $playlistDataProvider->getId();
         $playlistTracksDataProvider = $this->spotifyWebApi->getPlaylistTracks($playListId);
 
         $songToDelete = [];

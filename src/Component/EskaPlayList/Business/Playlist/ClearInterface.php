@@ -2,7 +2,9 @@
 
 namespace App\Component\EskaPlayList\Business\Playlist;
 
+use SpotifyApiConnect\Domain\DataTransferObject\PlaylistDataProvider;
+
 interface ClearInterface
 {
-    public function deleteAllSong();
+    public function deleteAllSong(PlaylistDataProvider $playlistDataProvider);
 }
