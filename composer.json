@@ -12,6 +12,7 @@
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
         "symfony/yaml": "4.2.*",
+        "wesolowski/spotify-api-connect": "^1.0",
         "xervice/data-provider": "^2.3"
     },
     "config": {

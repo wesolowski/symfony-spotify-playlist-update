@@ -5,6 +5,8 @@ namespace App\Tests\Integration\Component\EskaPlayList\Business\Model;
 
 
 use App\Component\EskaPlayList\Business\Model\Update;
+use App\Component\EskaPlayList\Business\Page\Html;
+use App\Component\EskaPlayList\Business\Page\SongPage;
 use App\Component\EskaPlayList\Business\Page\SongPageInterface;
 use App\Component\EskaPlayList\Business\Playlist\Clear;
 use App\Component\EskaPlayList\Business\Playlist\Search;
@@ -47,7 +49,7 @@ class UpdateTest extends TestCase
         parent::setUp();
     }
 
-    public function testUpdatePlayList()
+    public function testUpdatePlayListAADBDA()
     {
         $this->songs = [];
         $songOne = new TrackSearchRequestDataProvider();
@@ -136,5 +138,24 @@ class UpdateTest extends TestCase
             $this->symfonyUnitPlayList
         );
         return $update;
+    }
+
+
+    public function testxxxx()
+    {
+        $update = new Update(
+            $this->spotifyWebApi,
+            new SongPage(new Html()),
+            new Clear(
+                $this->spotifyWebApi,
+                $this->symfonyUnitPlayList
+            ),
+            new Search(
+                $this->spotifyWebApi,
+                __DIR__
+            ),
+            $this->symfonyUnitPlayList
+        );
+        $update->updatePlayList();
     }
 }

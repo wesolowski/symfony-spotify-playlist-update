@@ -12,35 +12,17 @@ use SpotifyApiConnect\SpotifyApiConnectFactoryInterface;
 class SpotifyWebApi
 {
     /**
-     * @var SpotifyApiConnectFactoryInterface
-     */
-    private $spotifyApiConnectFactory;
-
-    /**
-     * @var TokenFacadeInterface
-     */
-    private $tokenFacade;
-
-    /**
      * @param SpotifyApiConnectFactoryInterface $spotifyApiConnectFactory
      * @param TokenFacadeInterface $tokenFacade
+     * @return SpotifyWebApiInterface
      */
-    public function __construct(
+    public static function createSpotifyWebApi(
         SpotifyApiConnectFactoryInterface $spotifyApiConnectFactory,
         TokenFacadeInterface $tokenFacade
-    )
+    ): SpotifyWebApiInterface
     {
-        $this->spotifyApiConnectFactory = $spotifyApiConnectFactory;
-        $this->tokenFacade = $tokenFacade;
-    }
-
-    /**
-     * @return \SpotifyApiConnect\Application\SpotifyWebApiInterface
-     */
-    public function createSpotifyWebApi() : SpotifyWebApiInterface
-    {
-        return $this->spotifyApiConnectFactory->createSpotifyWebApi(
-            $this->tokenFacade->getToken()
+        return $spotifyApiConnectFactory->createSpotifyWebApi(
+            $tokenFacade->getToken()
         );
     }
 }

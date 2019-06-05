@@ -16,9 +16,9 @@ services:
     App\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
-
-    SpotifyApiConnect\:
-        resource: '../api/*'
+#
+#    SpotifyApiConnect\:
+#        resource: '../api/*'
 
     App\Component\Token\Communication\Controller\:
         resource: '../src/Component/Token/Communication/Controller/*'
@@ -27,3 +27,19 @@ services:
     App\Component\Token\Business\Model\RefreshToken:
         arguments:
             $kernelProjectDir : '%kernel.project_dir%'
+
+    App\Component\EskaPlayList\Business\Playlist\Search:
+        arguments:
+            $kernelProjectDir: '%kernel.project_dir%'
+
+    SpotifyApiConnect\Application\SpotifyWebApiInterface:
+        factory: ['App\Component\EskaPlayList\Business\Factory\SpotifyWebApi', 'createSpotifyWebApi']
+
+    SpotifyApiConnect\Domain\DataTransferObject\PlaylistDataProvider:
+        factory: ['App\Component\EskaPlayList\Business\Factory\PlayListInfo', 'createPlayListInfo']
+        arguments:
+            $playListName: 'Radio Eska - 2 x Gorąca 20'
+
+    SpotifyApiConnect\SpotifyApiConnectFactoryInterface:
+        class: SpotifyApiConnect\SpotifyApiConnectFactory
+
