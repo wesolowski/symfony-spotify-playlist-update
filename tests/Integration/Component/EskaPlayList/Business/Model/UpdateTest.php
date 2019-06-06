@@ -3,10 +3,7 @@
 
 namespace App\Tests\Integration\Component\EskaPlayList\Business\Model;
 
-
 use App\Component\EskaPlayList\Business\Model\Update;
-use App\Component\EskaPlayList\Business\Page\Html;
-use App\Component\EskaPlayList\Business\Page\SongPage;
 use App\Component\EskaPlayList\Business\Page\SongPageInterface;
 use App\Component\EskaPlayList\Business\Playlist\Clear;
 use App\Component\EskaPlayList\Business\Playlist\Search;
@@ -15,7 +12,6 @@ use SpotifyApiConnect\Application\SpotifyWebApiPhp\SpotifyWebApi;
 use SpotifyApiConnect\Domain\DataTransferObject\PlaylistDataProvider;
 use SpotifyApiConnect\Domain\DataTransferObject\TrackSearchRequestDataProvider;
 use SpotifyApiConnect\SpotifyApiConnectFactory;
-use SpotifyApiConnect\SpotifyApiConnectFactoryInterface;
 
 class UpdateTest extends TestCase
 {
@@ -42,7 +38,6 @@ class UpdateTest extends TestCase
         );
 
         $this->symfonyUnitPlayList = $this->spotifyWebApi->getUserPlaylistByName(
-            getenv('SPOTIFY_USER'),
             'UnitTestSymfony'
         );
 
@@ -140,22 +135,4 @@ class UpdateTest extends TestCase
         return $update;
     }
 
-
-    public function testxxxx()
-    {
-        $update = new Update(
-            $this->spotifyWebApi,
-            new SongPage(new Html()),
-            new Clear(
-                $this->spotifyWebApi,
-                $this->symfonyUnitPlayList
-            ),
-            new Search(
-                $this->spotifyWebApi,
-                __DIR__
-            ),
-            $this->symfonyUnitPlayList
-        );
-        $update->updatePlayList();
-    }
 }

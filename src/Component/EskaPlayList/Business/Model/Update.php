@@ -5,6 +5,7 @@ namespace App\Component\EskaPlayList\Business\Model;
 use App\Component\EskaPlayList\Business\Page\SongPageInterface;
 use App\Component\EskaPlayList\Business\Playlist\ClearInterface;
 use App\Component\EskaPlayList\Business\Playlist\SearchInterface;
+use App\Component\EskaPlayList\Persistence\DataTransferObject\SongResult;
 use SpotifyApiConnect\Application\SpotifyWebApiInterface;
 use SpotifyApiConnect\Domain\DataTransferObject\PlaylistDataProvider;
 
@@ -65,23 +66,24 @@ class Update implements UpdateInterface
         );
         $trackSearchRequestDataProviderList = $this->songPage->getList();
         $trackIds = [];
-        $notFoundSong = [];
+
+        $findResult = new SongResult();
 
         foreach ($trackSearchRequestDataProviderList as $trackSearchRequestDataProvider) {
             $trackId = $this->search->searchSongs($trackSearchRequestDataProvider);
             if (!empty($trackId)) {
+                $findResult->addFindSongs($trackSearchRequestDataProvider);
                 $trackIds[] = $trackId;
             } else {
-                $notFoundSong[] = $trackSearchRequestDataProvider;
+                $findResult->addNotFoundSongs($trackSearchRequestDataProvider);
             }
         }
-        dump($notFoundSong);
 
         $this->spotifyWebApi->addPlaylistTracks(
             $this->playlistDataProvider->getId(),
             $trackIds
         );
 
-
+        dump($findResult->getNotFoundSongs());
     }
 }
