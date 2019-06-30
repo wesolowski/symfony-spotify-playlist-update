@@ -77,12 +77,24 @@ class Update implements UpdateInterface
             } else {
                 $findResult->addNotFoundSongs($trackSearchRequestDataProvider);
             }
+
+            if(count($trackIds) % 100 === 0) {
+                $this->spotifyWebApi->addPlaylistTracks(
+                    $this->playlistDataProvider->getId(),
+                    $trackIds
+                );
+                $trackIds = [];
+            }
+
         }
 
-        $this->spotifyWebApi->addPlaylistTracks(
-            $this->playlistDataProvider->getId(),
-            $trackIds
-        );
+        if(!empty($trackIds)) {
+            $this->spotifyWebApi->addPlaylistTracks(
+                $this->playlistDataProvider->getId(),
+                $trackIds
+            );
+        }
+
 
         dump($findResult->getNotFoundSongs());
     }
