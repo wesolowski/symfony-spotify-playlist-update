@@ -39,6 +39,11 @@ class Clear implements ClearInterface
                 $song->getTrack()->getId()
             );
             $songToDelete[] = $deleteTrackInfoDataProvider;
+
+            if(count($songToDelete) % 100 === 0) {
+                $this->spotifyWebApi->deletePlaylistTracks($playListId, $songToDelete );
+                $songToDelete = [];
+            }
         }
 
         if(!empty($songToDelete)) {
