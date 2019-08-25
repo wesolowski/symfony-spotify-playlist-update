@@ -29,14 +29,12 @@ services:
         class: 'SpotifyApiConnect\Domain\DataTransferObject\PlaylistDataProvider'
         factory: ['App\Component\SpotifyPlayList\Business\Factory\PlayListInfo', 'createPlayListInfo']
         arguments:
-            $spotifyWebApi: '@SpotifyApiConnect\Application\SpotifyWebApiInterface'
             $playListName: 'Radio Eska - 2 x Gorąca 20'
 
     PlaylistDataProviderEskaPiosenki:
         class: 'SpotifyApiConnect\Domain\DataTransferObject\PlaylistDataProvider'
         factory: ['App\Component\SpotifyPlayList\Business\Factory\PlayListInfo', 'createPlayListInfo']
         arguments:
-            $spotifyWebApi: '@SpotifyApiConnect\Application\SpotifyWebApiInterface'
             $playListName: 'Eska Piosenki'
 
     App\Component\SpotifyPlayList\Business\Model\Update:
