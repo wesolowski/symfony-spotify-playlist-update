@@ -18,28 +18,28 @@ services:
         arguments:
             $kernelProjectDir : '%kernel.project_dir%'
 
-    App\Component\EskaPlayList\Business\Playlist\Search:
+    App\Component\SpotifyPlayList\Business\Playlist\Search:
         arguments:
             $kernelProjectDir: '%kernel.project_dir%'
 
     SpotifyApiConnect\Application\SpotifyWebApiInterface:
-        factory: ['App\Component\EskaPlayList\Business\Factory\SpotifyWebApi', 'createSpotifyWebApi']
+        factory: ['App\Component\SpotifyPlayList\Business\Factory\SpotifyWebApi', 'createSpotifyWebApi']
 
     PlaylistDataProviderRadioEska:
         class: 'SpotifyApiConnect\Domain\DataTransferObject\PlaylistDataProvider'
-        factory: ['App\Component\EskaPlayList\Business\Factory\PlayListInfo', 'createPlayListInfo']
+        factory: ['App\Component\SpotifyPlayList\Business\Factory\PlayListInfo', 'createPlayListInfo']
         arguments:
             $spotifyWebApi: '@SpotifyApiConnect\Application\SpotifyWebApiInterface'
             $playListName: 'Radio Eska - 2 x Gorąca 20'
 
     PlaylistDataProviderEskaPiosenki:
         class: 'SpotifyApiConnect\Domain\DataTransferObject\PlaylistDataProvider'
-        factory: ['App\Component\EskaPlayList\Business\Factory\PlayListInfo', 'createPlayListInfo']
+        factory: ['App\Component\SpotifyPlayList\Business\Factory\PlayListInfo', 'createPlayListInfo']
         arguments:
             $spotifyWebApi: '@SpotifyApiConnect\Application\SpotifyWebApiInterface'
             $playListName: 'Eska Piosenki'
 
-    App\Component\EskaPlayList\Business\Model\Update:
+    App\Component\SpotifyPlayList\Business\Model\Update:
         arguments:
             $playlistDataProvider: '@PlaylistDataProviderRadioEska'
 
