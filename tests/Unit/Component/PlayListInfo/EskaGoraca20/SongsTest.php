@@ -1,14 +1,12 @@
 <?php declare(strict_types=1);
 
-
-namespace App\Tests\Unit\Component\SpotifyPlayList\Business\Page;
-
+namespace App\Tests\Unit\Component\PlayListInfo\EskaGoraca20;
 
 use App\Component\SpotifyPlayList\Business\Page\HtmlInterface;
 use App\Component\SpotifyPlayList\Business\Page\SongPage;
 use PHPUnit\Framework\TestCase;
 
-class SongPageTest extends TestCase
+class SongsTest extends TestCase
 {
     public function testSongs()
     {

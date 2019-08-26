@@ -4,19 +4,37 @@
 namespace App\Component\SpotifyPlayList\Business\Page;
 
 
-use GuzzleHttp\Client;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use RuntimeException;
 
 class Html implements HtmlInterface
 {
     /**
-     * @return string
+     * @var HttpClientInterface
      */
-    public function get() : string
+    private $httpClient;
+
+    public function __construct(HttpClientInterface $httpClient)
     {
-        $client = new Client([
-            'base_uri' => 'https://www.eska.pl/'
-        ]);
-        $res = $client->get('2xgoraca20');
-        return (string)$res->getBody()->getContents();
+        $this->httpClient = $httpClient;
+    }
+
+    /**
+     * @param string $url
+     * @return string
+     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+     */
+    public function get(string $url): string
+    {
+        $response = $this->httpClient->request('GET', $url);
+        $statusCode = $response->getStatusCode();
+        if (200 > $statusCode || $statusCode > 299) {
+            throw new RuntimeException('Content not found for page: ' . $url);
+        }
+
+        return $response->getContent();
     }
 }

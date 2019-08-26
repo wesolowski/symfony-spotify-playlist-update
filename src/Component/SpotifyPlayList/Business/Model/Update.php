@@ -2,12 +2,12 @@
 
 namespace App\Component\SpotifyPlayList\Business\Model;
 
+use App\Component\SpotifyPlayList\Business\Factory\PlayListInfo;
 use App\Component\SpotifyPlayList\Business\Page\SongPageInterface;
 use App\Component\SpotifyPlayList\Business\Playlist\ClearInterface;
 use App\Component\SpotifyPlayList\Business\Playlist\SearchInterface;
 use App\Component\SpotifyPlayList\Persistence\DataTransferObject\SongResult;
 use SpotifyApiConnect\Application\SpotifyWebApiInterface;
-use SpotifyApiConnect\Domain\DataTransferObject\PlaylistDataProvider;
 
 class Update implements UpdateInterface
 {
@@ -15,11 +15,6 @@ class Update implements UpdateInterface
      * @var SpotifyWebApiInterface
      */
     private $spotifyWebApi;
-
-    /**
-     * @var SongPageInterface
-     */
-    private $songPage;
 
     /**
      * @var ClearInterface
@@ -32,39 +27,32 @@ class Update implements UpdateInterface
     private $search;
 
     /**
-     * @var PlaylistDataProvider
-     */
-    private $playlistDataProvider;
-
-    /**
      * @param SpotifyWebApiInterface $spotifyWebApi
-     * @param SongPageInterface $songPage
      * @param ClearInterface $clear
      * @param SearchInterface $search
-     * @param PlaylistDataProvider $playlistDataProvider
      */
     public function __construct(
         SpotifyWebApiInterface $spotifyWebApi,
-        SongPageInterface $songPage,
         ClearInterface $clear,
-        SearchInterface $search,
-        PlaylistDataProvider $playlistDataProvider
+        SearchInterface $search
     )
     {
         $this->spotifyWebApi = $spotifyWebApi;
-        $this->songPage = $songPage;
         $this->clear = $clear;
         $this->search = $search;
-        $this->playlistDataProvider = $playlistDataProvider;
     }
 
 
-    public function updatePlayList()
+    public function updatePlayList(SongPageInterface $songPageInfo)
     {
-        $this->clear->deleteAllSong(
-            $this->playlistDataProvider
+        $playlistDataProvider = PlayListInfo::createPlayListInfo(
+            $this->spotifyWebApi,
+            $songPageInfo->getSpotifyPlaylistName()
         );
-        $trackSearchRequestDataProviderList = $this->songPage->getList();
+
+        $this->clear->deleteAllSong($playlistDataProvider);
+
+        $trackSearchRequestDataProviderList = $songPageInfo->getList();
         $trackIds = [];
 
         $findResult = new SongResult();
@@ -78,9 +66,9 @@ class Update implements UpdateInterface
                 $findResult->addNotFoundSongs($trackSearchRequestDataProvider);
             }
 
-            if(count($trackIds) % 100 === 0) {
+            if (count($trackIds) % 100 === 0) {
                 $this->spotifyWebApi->addPlaylistTracks(
-                    $this->playlistDataProvider->getId(),
+                    $playlistDataProvider->getId(),
                     $trackIds
                 );
                 $trackIds = [];
@@ -88,13 +76,12 @@ class Update implements UpdateInterface
 
         }
 
-        if(!empty($trackIds)) {
+        if (!empty($trackIds)) {
             $this->spotifyWebApi->addPlaylistTracks(
-                $this->playlistDataProvider->getId(),
+                $playlistDataProvider->getId(),
                 $trackIds
             );
         }
-
 
         dump($findResult->getNotFoundSongs());
     }

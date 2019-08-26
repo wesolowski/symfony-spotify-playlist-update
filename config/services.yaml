@@ -37,14 +37,16 @@ services:
         arguments:
             $playListName: 'Eska Piosenki'
 
-    App\Component\SpotifyPlayList\Business\Model\Update:
-        arguments:
-            $playlistDataProvider: '@PlaylistDataProviderRadioEska'
-
     App\Component\NotFoundSong\Business\Find\PlayListForNotFoundSong:
         arguments:
             $playlistDataProvider: '@PlaylistDataProviderEskaPiosenki'
 
     SpotifyApiConnect\SpotifyApiConnectFactoryInterface:
         class: SpotifyApiConnect\SpotifyApiConnectFactory
+
+    App\Component\SpotifyPlayList\Communication\Command\SpotifyUpdatePlayList:
+        arguments:
+            $playListInfos:
+                - '@App\Component\PlayListInfo\Test\Songs'
+                - '@App\Component\PlayListInfo\EskaGoraca20\Songs'
 

@@ -2,7 +2,9 @@
 
 namespace App\Component\SpotifyPlayList\Business;
 
+use App\Component\SpotifyPlayList\Business\Page\SongPageInterface;
+
 interface EskaPlayListFacadeInterface
 {
-    public function updatePlayList();
+    public function updatePlayList(SongPageInterface $songPageInfo);
 }

@@ -5,6 +5,7 @@ namespace App\Component\SpotifyPlayList\Business;
 
 
 use App\Component\SpotifyPlayList\Business\Model\UpdateInterface;
+use App\Component\SpotifyPlayList\Business\Page\SongPageInterface;
 
 class EskaPlayListFacade implements EskaPlayListFacadeInterface
 {
@@ -22,8 +23,8 @@ class EskaPlayListFacade implements EskaPlayListFacadeInterface
         $this->update = $update;
     }
 
-    public function updatePlayList()
+    public function updatePlayList(SongPageInterface $songPageInfo)
     {
-        $this->update->updatePlayList();
+        $this->update->updatePlayList($songPageInfo);
     }
 }
