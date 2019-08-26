@@ -34,7 +34,7 @@ class UpdateTest extends TestCase
         $spotifyApiAuth = $spotifyApiConnectFactory->createSpotifyApiAuth();
 
         $this->spotifyWebApi = $spotifyApiConnectFactory->createSpotifyWebApi(
-            $spotifyApiAuth->getAccessByRefreshToken(getenv('REFRESH_TOKEN'))
+            $spotifyApiAuth->getAccessByRefreshToken($_SERVER['REFRESH_TOKEN'])
         );
 
         $this->symfonyUnitPlayList = $this->spotifyWebApi->getUserPlaylistByName(
