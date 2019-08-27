@@ -66,7 +66,7 @@ class Update implements UpdateInterface
                 $findResult->addNotFoundSongs($trackSearchRequestDataProvider);
             }
 
-            if (count($trackIds) % 100 === 0) {
+            if (!empty($trackIds) && count($trackIds) % 100 === 0) {
                 $this->spotifyWebApi->addPlaylistTracks(
                     $playlistDataProvider->getId(),
                     $trackIds
