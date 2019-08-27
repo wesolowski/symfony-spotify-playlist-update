@@ -47,7 +47,6 @@ services:
     App\Component\SpotifyPlayList\Communication\Command\SpotifyUpdatePlayList:
         arguments:
             $playListInfos:
-                - '@App\Component\PlayListInfo\Test\Songs'
-                - '@App\Component\PlayListInfo\EskaGoraca20\Songs'
+                - '@App\Component\PlayListInfo\EskaGoraca20'
                 - '@App\Component\PlayListInfo\RadioZetListPrzebojow'
 

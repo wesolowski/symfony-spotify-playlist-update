@@ -50,13 +50,12 @@ class SpotifyUpdatePlayList extends Command
             ->setDefinition([
                 new InputArgument('playlist', InputArgument::IS_ARRAY, 'Names of the receivers/transports to consume in order of priority', $defaultReceiverName ? [$defaultReceiverName] : []),
             ])
-            ->setDescription('Consumes messages')
+            ->setDescription('Spotify update playlist')
             ->setHelp(<<<'EOF'
-The <info>%command.name%</info> command consumes messages and dispatches them to the message bus.
-    <info>php %command.full_name% <receiver-name></info>
-To receive from multiple transports, pass each name:
-    <info>php %command.full_name% playListName</info>
-    <info>php %command.full_name% <receiver-name> --playlist=playListName</info>
+The <info>%command.name%</info> command update a spotify playlist
+    <info>php %command.full_name% <playlistName1-name></info>
+To receive from multiple playlist, pass each name:
+    <info>php %command.full_name% <playlistName1> <playlistName2></info>
 EOF
             );
     }

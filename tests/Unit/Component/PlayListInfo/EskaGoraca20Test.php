@@ -2,19 +2,19 @@
 
 namespace App\Tests\Unit\Component\PlayListInfo\EskaGoraca20;
 
+use App\Component\PlayListInfo\EskaGoraca20;
 use App\Component\SpotifyPlayList\Business\Page\HtmlInterface;
-use App\Component\SpotifyPlayList\Business\Page\SongPage;
 use PHPUnit\Framework\TestCase;
 
-class SongsTest extends TestCase
+class EskaGoraca20Test extends TestCase
 {
     public function testSongs()
     {
         $htmlMock = $this->createMock(HtmlInterface::class);
         $htmlMock->method('get')
-            ->willReturn(file_get_contents(__DIR__ . '/eska.html'));
+            ->willReturn(file_get_contents(__DIR__ . '/html/eska_goraca20.html'));
 
-        $songPage = new SongPage($htmlMock);
+        $songPage = new EskaGoraca20($htmlMock);
         $songInfo = $songPage->getList();
 
         $this->assertCount(5, $songInfo);

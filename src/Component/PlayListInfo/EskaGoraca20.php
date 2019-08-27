@@ -1,7 +1,6 @@
 <?php declare(strict_types=1);
 
-
-namespace App\Component\PlayListInfo\Test;
+namespace App\Component\PlayListInfo;
 
 
 use App\Component\SpotifyPlayList\Business\Page\HtmlInterface;
@@ -10,13 +9,11 @@ use SpotifyApiConnect\Domain\DataTransferObject\TrackSearchRequestDataProvider;
 use DOMDocument;
 use DomXPath;
 
-class Songs implements SongPageInterface
+class EskaGoraca20 implements SongPageInterface
 {
     private const URL = 'https://www.eska.pl/2xgoraca20';
 
-    private const SPOTIFY_PLAYLIST_NAME = 'Test';
-
-    private const CONSOLE_COMMAND_NAME = 'Test';
+    private const SPOTIFY_PLAYLIST_NAME = 'Radio Eska - 2 x Gorąca 20';
 
     /**
      * @var HtmlInterface
@@ -65,9 +62,9 @@ class Songs implements SongPageInterface
     /**
      * @return string
      */
-    public function getConsoleName() : string
+    public function getConsoleName(): string
     {
-        return self::CONSOLE_COMMAND_NAME;
+        return substr(strrchr(__CLASS__, "\\"), 1);
     }
 
     /**
