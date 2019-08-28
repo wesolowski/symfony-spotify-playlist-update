@@ -49,4 +49,6 @@ services:
             $playListInfos:
                 - '@App\Component\PlayListInfo\EskaGoraca20'
                 - '@App\Component\PlayListInfo\RadioZetListPrzebojow'
+                - '@App\Component\PlayListInfo\RmfFmWeek'
+                - '@App\Component\PlayListInfo\RadioZetWeek'
 
