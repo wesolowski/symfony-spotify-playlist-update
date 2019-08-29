@@ -3,6 +3,7 @@
 namespace App\Tests\Unit\Component\PlayListInfo\EskaGoraca20;
 
 use App\Component\PlayListInfo\EskaGoraca20;
+use App\Component\PlayListInfo\Model\XpathParser;
 use App\Component\SpotifyPlayList\Business\Page\HtmlInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +15,7 @@ class EskaGoraca20Test extends TestCase
         $htmlMock->method('get')
             ->willReturn(file_get_contents(__DIR__ . '/html/eska_goraca20.html'));
 
-        $songPage = new EskaGoraca20($htmlMock);
+        $songPage = new EskaGoraca20($htmlMock, new XpathParser());
         $songInfo = $songPage->getList();
 
         $this->assertCount(5, $songInfo);

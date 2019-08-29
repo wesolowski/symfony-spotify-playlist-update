@@ -3,20 +3,22 @@
 namespace App\Tests\Unit\Component\PlayListInfo\EskaGoraca20;
 
 use App\Component\PlayListInfo\EskaGoraca20;
+use App\Component\PlayListInfo\Model\RadioSpis;
+use App\Component\PlayListInfo\Model\XpathParser;
 use App\Component\PlayListInfo\RmfFmWeek;
 use App\Component\SpotifyPlayList\Business\Page\HtmlInterface;
 use PHPUnit\Framework\TestCase;
 
-class RmfFmWeekTest extends TestCase
+class RadioSpisTest extends TestCase
 {
     public function testSongs()
     {
         $htmlMock = $this->createMock(HtmlInterface::class);
         $htmlMock->method('get')
-            ->willReturn(file_get_contents(__DIR__ . '/html/rmf_fm_week.html'));
+            ->willReturn(file_get_contents(__DIR__ . '/../html/rmf_fm_week.html'));
 
-        $songPage = new RmfFmWeek($htmlMock);
-        $songInfo = $songPage->getList();
+        $songPage = new RadioSpis($htmlMock, new XpathParser());
+        $songInfo = $songPage->getList('unit');
 
         $this->assertCount(5, $songInfo);
 

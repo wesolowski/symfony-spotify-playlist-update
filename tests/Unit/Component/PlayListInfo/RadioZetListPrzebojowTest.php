@@ -4,6 +4,7 @@
 namespace App\Tests\Unit\Component\PlayListInfo;
 
 
+use App\Component\PlayListInfo\Model\XpathParser;
 use App\Component\PlayListInfo\RadioZetListPrzebojow;
 use App\Component\SpotifyPlayList\Business\Page\HtmlInterface;
 use PHPUnit\Framework\TestCase;
@@ -16,7 +17,7 @@ class RadioZetListPrzebojowTest extends TestCase
         $htmlMock->method('get')
             ->willReturn(file_get_contents(__DIR__ . '/html/RadioZET_ListaPrzebojów.html'));
 
-        $songPage = new RadioZetListPrzebojow($htmlMock);
+        $songPage = new RadioZetListPrzebojow($htmlMock, new XpathParser());
         $songInfo = $songPage->getList();
 
         $this->assertCount(4, $songInfo);
