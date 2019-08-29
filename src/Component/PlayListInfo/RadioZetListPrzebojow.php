@@ -37,7 +37,11 @@ class RadioZetListPrzebojow implements SongPageInterface
         $infos = [];
         libxml_use_internal_errors(true);
 
-        $nodes = $this->getXpath()->query('//div[contains(concat(" ",normalize-space(@class)," ")," votingData ")]//div[contains(concat(" ",normalize-space(@class)," ")," list-element ")]//div[contains(concat(" ",normalize-space(@class)," ")," track ")]');
+        $nodes = $this->html->get(
+            self::URL,
+            '//div[contains(concat(" ",normalize-space(@class)," ")," votingData ")]//div[contains(concat(" ",normalize-space(@class)," ")," list-element ")]//div[contains(concat(" ",normalize-space(@class)," ")," track ")]'
+        );
+
         foreach ($nodes as $node) {
 
             $trackSearchRequestDataProvider = new TrackSearchRequestDataProvider();
@@ -70,23 +74,13 @@ class RadioZetListPrzebojow implements SongPageInterface
         return substr(strrchr(__CLASS__, "\\"), 1);
     }
 
-    /**
-     * @return DomXPath
-     */
-    private function getXpath(): DOMXPath
-    {
-        $dom = new DOMDocument();
-        $html = $this->html->get(self::URL);
-        $dom->loadHTML($html);
-        return new DOMXPath($dom);
-    }
 
     private function clearName(string $track): string
     {
         $pos = strpos($track, '(feat. ');
         if ($pos !== false) {
-            $expolode = explode('(feat. ', $track);
-            $track = ltrim($expolode[0]) . trim( substr($expolode[1], strpos($expolode[1], ')') + 1) );
+            $explode = explode('(feat. ', $track);
+            $track = ltrim($explode[0]) . trim( substr($explode[1], strpos($explode[1], ')') + 1) );
         }
         return $track;
     }

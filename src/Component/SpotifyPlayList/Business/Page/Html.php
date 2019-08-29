@@ -6,6 +6,10 @@ namespace App\Component\SpotifyPlayList\Business\Page;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use RuntimeException;
+use DomDocument;
+use DOMXPath;
+use DOMNodeList;
+use \Symfony\Contracts\HttpClient\Exception as HttpClientException;
 
 class Html implements HtmlInterface
 {
@@ -21,13 +25,14 @@ class Html implements HtmlInterface
 
     /**
      * @param string $url
-     * @return string
-     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+     * @param string $xpath
+     * @return DOMNodeList
+     * @throws HttpClientException\ClientExceptionInterface
+     * @throws HttpClientException\RedirectionExceptionInterface
+     * @throws HttpClientException\ServerExceptionInterface
+     * @throws HttpClientException\TransportExceptionInterface
      */
-    public function get(string $url): string
+    public function get(string $url, string $xpath): DOMNodeList
     {
         $response = $this->httpClient->request('GET', $url);
         $statusCode = $response->getStatusCode();
@@ -35,6 +40,20 @@ class Html implements HtmlInterface
             throw new RuntimeException('Content not found for page: ' . $url);
         }
 
-        return $response->getContent();
+        $dom = new DomDocument;
+        $dom->loadHTML(
+            $response->getContent()
+        );
+
+        $domXpath = new DOMXPath($dom);
+        $domNodeList = $domXpath->query($xpath);
+
+        if (!$domNodeList instanceof DOMNodeList) {
+            throw new RuntimeException(sprintf(
+                'Xpath "%s" not found for page: %s', $xpath, $url
+            ));
+        }
+
+        return $domNodeList;
     }
 }

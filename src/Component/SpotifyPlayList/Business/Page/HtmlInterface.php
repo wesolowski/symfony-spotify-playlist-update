@@ -2,10 +2,23 @@
 
 namespace App\Component\SpotifyPlayList\Business\Page;
 
+use DomDocument;
+use DOMNodeList;
+use DOMXPath;
+use RuntimeException;
+use Symfony\Contracts\HttpClient\Exception as HttpClientException;
+
 interface HtmlInterface
 {
+
     /**
-     * @return string
+     * @param string $url
+     * @param string $xpath
+     * @return DOMNodeList
+     * @throws HttpClientException\ClientExceptionInterface
+     * @throws HttpClientException\RedirectionExceptionInterface
+     * @throws HttpClientException\ServerExceptionInterface
+     * @throws HttpClientException\TransportExceptionInterface
      */
-    public function get(string $url): string;
+    public function get(string $url, string $xpath): DOMNodeList;
 }

@@ -36,7 +36,7 @@ class EskaGoraca20 implements SongPageInterface
         $infos = [];
         libxml_use_internal_errors(true);
 
-        $nodes = $this->getXpath()->query('//div[@class="single-hit__info"]');
+        $nodes = $this->html->get(self::URL, '//div[@class="single-hit__info"]');
         foreach ($nodes as $node) {
             $trackSearchRequestDataProvider = new TrackSearchRequestDataProvider();
             $trackSearchRequestDataProvider->setTrack(
@@ -65,16 +65,5 @@ class EskaGoraca20 implements SongPageInterface
     public function getConsoleName(): string
     {
         return substr(strrchr(__CLASS__, "\\"), 1);
-    }
-
-    /**
-     * @return DomXPath
-     */
-    private function getXpath(): DomXPath
-    {
-        $dom = new DomDocument;
-        $html = $this->html->get(self::URL);
-        $dom->loadHTML($html);
-        return new DomXPath($dom);
     }
 }
