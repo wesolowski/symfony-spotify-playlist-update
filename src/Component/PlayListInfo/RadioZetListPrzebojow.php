@@ -4,11 +4,10 @@
 namespace App\Component\PlayListInfo;
 
 
+use App\Component\PlayListInfo\Model\XpathParserInterface;
 use App\Component\SpotifyPlayList\Business\Page\HtmlInterface;
 use App\Component\SpotifyPlayList\Business\Page\SongPageInterface;
 use SpotifyApiConnect\Domain\DataTransferObject\TrackSearchRequestDataProvider;
-use DOMDocument;
-use DOMXPath;
 
 class RadioZetListPrzebojow implements SongPageInterface
 {
@@ -16,17 +15,26 @@ class RadioZetListPrzebojow implements SongPageInterface
 
     private const SPOTIFY_PLAYLIST_NAME = 'Radio ZET - Lista przebojów';
 
+    private const XPATH = '//div[contains(concat(" ",normalize-space(@class)," ")," votingData ")]//div[contains(concat(" ",normalize-space(@class)," ")," list-element ")]//div[contains(concat(" ",normalize-space(@class)," ")," track ")]';
+
     /**
      * @var HtmlInterface
      */
     private $html;
 
     /**
-     * @param HtmlInterface $html
+     * @var XpathParserInterface
      */
-    public function __construct(HtmlInterface $html)
+    private $xpathParser;
+
+    /**
+     * @param HtmlInterface $html
+     * @param XpathParserInterface $xpathParser
+     */
+    public function __construct(HtmlInterface $html, XpathParserInterface $xpathParser)
     {
         $this->html = $html;
+        $this->xpathParser = $xpathParser;
     }
 
     /**
@@ -37,10 +45,8 @@ class RadioZetListPrzebojow implements SongPageInterface
         $infos = [];
         libxml_use_internal_errors(true);
 
-        $nodes = $this->html->get(
-            self::URL,
-            '//div[contains(concat(" ",normalize-space(@class)," ")," votingData ")]//div[contains(concat(" ",normalize-space(@class)," ")," list-element ")]//div[contains(concat(" ",normalize-space(@class)," ")," track ")]'
-        );
+        $html = $this->html->get(self::URL);
+        $nodes = $this->xpathParser->parser($html, self::XPATH);
 
         foreach ($nodes as $node) {
 

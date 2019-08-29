@@ -3,11 +3,8 @@
 
 namespace App\Component\PlayListInfo\Model;
 
-
 use App\Component\SpotifyPlayList\Business\Page\HtmlInterface;
 use SpotifyApiConnect\Domain\DataTransferObject\TrackSearchRequestDataProvider;
-use DOMDocument;
-use DOMNodeList;
 
 final class RadioSpis implements RadioSpisInterface
 {
@@ -21,11 +18,18 @@ final class RadioSpis implements RadioSpisInterface
     private $html;
 
     /**
-     * @param HtmlInterface $html
+     * @var XpathParserInterface
      */
-    public function __construct(HtmlInterface $html)
+    private $xpathParser;
+
+    /**
+     * @param HtmlInterface $html
+     * @param XpathParserInterface $xpathParser
+     */
+    public function __construct(HtmlInterface $html, XpathParserInterface $xpathParser)
     {
         $this->html = $html;
+        $this->xpathParser = $xpathParser;
     }
 
     /**
@@ -77,7 +81,9 @@ final class RadioSpis implements RadioSpisInterface
         foreach ($rangeDate as $searchDate) {
             $date = date('Y-m-d', strtotime($searchDate));
             for ($time = 7; $time <= 24; $time += 2) {
-                $nodes = $this->html->get(sprintf(self::URL, $radio, $date, $time), self::XPATH);
+
+                $html = $this->html->get(sprintf(self::URL, $radio, $date, $time));
+                $nodes = $this->xpathParser->parser($html, self::XPATH);
 
                 foreach ($nodes as $node) {
                     $song = $node->nodeValue;

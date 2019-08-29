@@ -6,9 +6,6 @@ namespace App\Component\SpotifyPlayList\Business\Page;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use RuntimeException;
-use DomDocument;
-use DOMXPath;
-use DOMNodeList;
 use \Symfony\Contracts\HttpClient\Exception as HttpClientException;
 
 class Html implements HtmlInterface
@@ -32,7 +29,7 @@ class Html implements HtmlInterface
      * @throws HttpClientException\ServerExceptionInterface
      * @throws HttpClientException\TransportExceptionInterface
      */
-    public function get(string $url, string $xpath): DOMNodeList
+    public function get(string $url): string
     {
         $response = $this->httpClient->request('GET', $url);
         $statusCode = $response->getStatusCode();
@@ -40,20 +37,6 @@ class Html implements HtmlInterface
             throw new RuntimeException('Content not found for page: ' . $url);
         }
 
-        $dom = new DomDocument;
-        $dom->loadHTML(
-            $response->getContent()
-        );
-
-        $domXpath = new DOMXPath($dom);
-        $domNodeList = $domXpath->query($xpath);
-
-        if (!$domNodeList instanceof DOMNodeList) {
-            throw new RuntimeException(sprintf(
-                'Xpath "%s" not found for page: %s', $xpath, $url
-            ));
-        }
-
-        return $domNodeList;
+        return $response->getContent();
     }
 }

@@ -3,11 +3,11 @@
 namespace App\Component\PlayListInfo;
 
 
+use App\Component\PlayListInfo\Model\XpathParser;
+use App\Component\PlayListInfo\Model\XpathParserInterface;
 use App\Component\SpotifyPlayList\Business\Page\HtmlInterface;
 use App\Component\SpotifyPlayList\Business\Page\SongPageInterface;
 use SpotifyApiConnect\Domain\DataTransferObject\TrackSearchRequestDataProvider;
-use DOMDocument;
-use DomXPath;
 
 class EskaGoraca20 implements SongPageInterface
 {
@@ -15,18 +15,28 @@ class EskaGoraca20 implements SongPageInterface
 
     private const SPOTIFY_PLAYLIST_NAME = 'Radio Eska - 2 x Gorąca 20';
 
+    private const XPATH = '//div[@class="single-hit__info"]';
+
     /**
      * @var HtmlInterface
      */
     private $html;
 
     /**
-     * @param HtmlInterface $html
+     * @var XpathParserInterface
      */
-    public function __construct(HtmlInterface $html)
+    private $xpathParser;
+
+    /**
+     * @param HtmlInterface $html
+     * @param XpathParserInterface $xpathParser
+     */
+    public function __construct(HtmlInterface $html, XpathParserInterface $xpathParser)
     {
         $this->html = $html;
+        $this->xpathParser = $xpathParser;
     }
+
 
     /**
      * @return TrackSearchRequestDataProvider[]
@@ -36,7 +46,9 @@ class EskaGoraca20 implements SongPageInterface
         $infos = [];
         libxml_use_internal_errors(true);
 
-        $nodes = $this->html->get(self::URL, '//div[@class="single-hit__info"]');
+        $html = $this->html->get(self::URL);
+        $nodes = $this->xpathParser->parser($html, self::XPATH);
+
         foreach ($nodes as $node) {
             $trackSearchRequestDataProvider = new TrackSearchRequestDataProvider();
             $trackSearchRequestDataProvider->setTrack(
