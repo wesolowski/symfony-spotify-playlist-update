@@ -19,6 +19,11 @@ class UpdateTest extends TestCase
     private $songs = [];
 
     /**
+     * @var SongPageInterface
+     */
+    private $songPage;
+
+    /**
      * @var SpotifyWebApi
      */
     private $spotifyWebApi;
@@ -41,35 +46,46 @@ class UpdateTest extends TestCase
             'UnitTestSymfony'
         );
 
+        $this->songPage = $this->createMock(SongPageInterface::class);
+        $this->songPage->method('getSpotifyPlaylistName')->willReturn(
+            'UnitTestSymfony'
+        );
+
         parent::setUp();
     }
 
-    public function testUpdatePlayListAADBDA()
+    public function testUpdatePlayList()
     {
-        $this->songs = [];
+        $songs = [];
         $songOne = new TrackSearchRequestDataProvider();
         $songOne->setArtist('Sting');
         $songOne->setTrack('Englishman In New York');
-        $this->songs[] = $songOne;
+        $songs[] = $songOne;
 
         $songTwo = new TrackSearchRequestDataProvider();
         $songTwo->setArtist('U2');
         $songTwo->setTrack('I Still Haven\'t Found What I\'m Looking For');
-        $this->songs[] = $songTwo;
+        $songs[] = $songTwo;
 
         $songNotFound = new TrackSearchRequestDataProvider();
         $songNotFound->setArtist('unit-test not found');
         $songNotFound->setTrack('aaaa bbb cccc unit test');
-        $this->songs[] = $songNotFound;
+        $songs[] = $songNotFound;
 
         $songFoundInConfig = new TrackSearchRequestDataProvider();
         $songFoundInConfig->setArtist('unit-test config found');
         $songFoundInConfig->setTrack('config found test');
-        $this->songs[] = $songFoundInConfig;
+        $songs[] = $songFoundInConfig;
 
         $update = $this->getUpdateClass();
 
-        $update->updatePlayList();
+        $this->songPage->method('getList')->willReturn(
+            $songs
+        );
+
+        $update->updatePlayList(
+            $this->songPage
+        );
 
         $playList = $this->spotifyWebApi->getPlaylistTracks($this->symfonyUnitPlayList->getId());
 
@@ -90,15 +106,21 @@ class UpdateTest extends TestCase
         $playList = $this->spotifyWebApi->getPlaylistTracks($this->symfonyUnitPlayList->getId());
         $this->assertCount(3, $playList->getItems());
 
-        $this->songs = [];
+        $songs = [];
         $song = new TrackSearchRequestDataProvider();
         $song->setArtist('Michael Jackson');
         $song->setTrack('Billie Jean');
-        $this->songs[] = $song;
+        $songs[] = $song;
 
         $update = $this->getUpdateClass();
 
-        $update->updatePlayList();
+        $this->songPage->method('getList')->willReturn(
+            $songs
+        );
+
+        $update->updatePlayList(
+            $this->songPage
+        );
 
         $playList = $this->spotifyWebApi->getPlaylistTracks($this->symfonyUnitPlayList->getId());
 
@@ -114,14 +136,8 @@ class UpdateTest extends TestCase
      */
     protected function getUpdateClass(): Update
     {
-        $songPage = $this->createMock(SongPageInterface::class);
-        $songPage->method('getList')->willReturn(
-            $this->songs
-        );
-
-        $update = new Update(
+        return new Update(
             $this->spotifyWebApi,
-            $songPage,
             new Clear(
                 $this->spotifyWebApi,
                 $this->symfonyUnitPlayList
@@ -129,10 +145,8 @@ class UpdateTest extends TestCase
             new Search(
                 $this->spotifyWebApi,
                 __DIR__
-            ),
-            $this->symfonyUnitPlayList
+            )
         );
-        return $update;
     }
 
 }
