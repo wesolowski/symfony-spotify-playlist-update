@@ -1296,16 +1296,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.4.5",
+            "version": "v1.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "4467ab35c82edebac58fe58c22cea166a805eb1f"
+                "reference": "133e649fdf08aeb8741be1ba955ccbe5cd17c696"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/4467ab35c82edebac58fe58c22cea166a805eb1f",
-                "reference": "4467ab35c82edebac58fe58c22cea166a805eb1f",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/133e649fdf08aeb8741be1ba955ccbe5cd17c696",
+                "reference": "133e649fdf08aeb8741be1ba955ccbe5cd17c696",
                 "shasum": ""
             },
             "require": {
@@ -1341,7 +1341,7 @@
                 }
             ],
             "description": "Composer plugin for Symfony",
-            "time": "2019-07-19T08:59:18+00:00"
+            "time": "2019-09-19T14:55:57+00:00"
         },
         {
             "name": "symfony/framework-bundle",
@@ -2280,20 +2280,20 @@
         },
         {
             "name": "wesolowski/spotify-api-connect",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wesolowski/spotify-api-connect.git",
-                "reference": "840fb9bac5db13fb97d48972448793457e6913ff"
+                "reference": "f5c9131b1463b5320ba0b233a2b5c498d0a75530"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wesolowski/spotify-api-connect/zipball/840fb9bac5db13fb97d48972448793457e6913ff",
-                "reference": "840fb9bac5db13fb97d48972448793457e6913ff",
+                "url": "https://api.github.com/repos/wesolowski/spotify-api-connect/zipball/f5c9131b1463b5320ba0b233a2b5c498d0a75530",
+                "reference": "f5c9131b1463b5320ba0b233a2b5c498d0a75530",
                 "shasum": ""
             },
             "require": {
-                "jwilsson/spotify-web-api-php": "^2.6.1",
+                "jwilsson/spotify-web-api-php": "2.10.0",
                 "php": ">=7.2.0",
                 "xervice/data-provider": "^2.3"
             },
@@ -2319,7 +2319,7 @@
                     "email": "wesolyy@gmail.com"
                 }
             ],
-            "time": "2019-09-08T20:25:59+00:00"
+            "time": "2019-09-24T20:23:16+00:00"
         },
         {
             "name": "xervice/config",
