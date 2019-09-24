@@ -60,7 +60,6 @@ class Update implements UpdateInterface
         foreach ($trackSearchRequestDataProviderList as $trackSearchRequestDataProvider) {
             $trackId = $this->search->searchSongs($trackSearchRequestDataProvider);
             if (!empty($trackId)) {
-                dump($trackSearchRequestDataProvider->getArtist() . ' | ' . $trackSearchRequestDataProvider->getTrack());
                 $findResult->addFindSongs($trackSearchRequestDataProvider);
                 $trackIds[] = $trackId;
             } else {
@@ -68,7 +67,6 @@ class Update implements UpdateInterface
             }
 
             if (!empty($trackIds) && count($trackIds) % 100 === 0) {
-                dump(__FILE__ .':'. __LINE__);
                 $this->spotifyWebApi->addPlaylistTracks(
                     $playlistDataProvider->getId(),
                     $trackIds
