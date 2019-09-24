@@ -2280,16 +2280,16 @@
         },
         {
             "name": "wesolowski/spotify-api-connect",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wesolowski/spotify-api-connect.git",
-                "reference": "f5c9131b1463b5320ba0b233a2b5c498d0a75530"
+                "reference": "8caac83e7bc56d107463084979ad52c13fcda641"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wesolowski/spotify-api-connect/zipball/f5c9131b1463b5320ba0b233a2b5c498d0a75530",
-                "reference": "f5c9131b1463b5320ba0b233a2b5c498d0a75530",
+                "url": "https://api.github.com/repos/wesolowski/spotify-api-connect/zipball/8caac83e7bc56d107463084979ad52c13fcda641",
+                "reference": "8caac83e7bc56d107463084979ad52c13fcda641",
                 "shasum": ""
             },
             "require": {
@@ -2319,7 +2319,7 @@
                     "email": "wesolyy@gmail.com"
                 }
             ],
-            "time": "2019-09-24T20:23:16+00:00"
+            "time": "2019-09-24T20:55:51+00:00"
         },
         {
             "name": "xervice/config",
